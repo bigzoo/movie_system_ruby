@@ -17,4 +17,10 @@ class Movie
       movies
     end
 
+    define_singleton_method(:find) do |id|
+      result = DB.exec("SELECT * FROM movies WHERE id = #{id};")
+      name = result.first().fetch("name")
+      Movie.new({:name => name, :id => id})
+    end
+
   end
