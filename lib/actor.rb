@@ -17,4 +17,10 @@ class Actor
     actors
   end
 
+  define_singleton_method(:find) do |id|
+    result = DB.exec("SELECT * FROM actors WHERE id = #{id};")
+    name = result.first.fetch('name')
+    Actor.new(name: name, id: id)
+  end
+
 end
