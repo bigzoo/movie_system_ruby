@@ -28,4 +28,8 @@ class Actor
     @id = result.first.fetch('id').to_i
   end
 
+  define_method(:==) do |another_actor|
+    name.==(another_actor.name).&(id.==(another_actor.id))
+  end
+
 end
