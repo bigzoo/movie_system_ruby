@@ -28,4 +28,8 @@ class Movie
       @id = result.first().fetch("id").to_i()
     end
 
+    define_method(:==) do |another_movie|
+      self.name().==(another_movie.name()).&(self.id().==(another_movie.id()))
+    end
+
   end
