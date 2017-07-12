@@ -32,4 +32,13 @@ class Movie
       self.name().==(another_movie.name()).&(self.id().==(another_movie.id()))
     end
 
+    define_method(:update) do |attributes|
+      @name = attributes.fetch(:name, @name)
+      @id = self.id()
+      DB.exec("UPDATE movies SET name = '#{@name}' WHERE id = #{@id};")
+      attributes.fetch(:actor_ids, []).each() do |actor_id|
+        DB.exec("INSERT INTO actors_movies (actor_id, movie_id) VALUES (#{actor_id}, #{self.id()});")
+      end
+    end
+
   end
