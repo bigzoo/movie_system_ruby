@@ -45,3 +45,9 @@ require("sinatra")
    erb(:actor_info)
  end
 
+ get("/movies/:id") do
+   @movie = Movie.find(params.fetch("id").to_i())
+   @actors = Actor.all()
+   erb(:movie_info)
+ end
+
