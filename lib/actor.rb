@@ -23,4 +23,9 @@ class Actor
     Actor.new(name: name, id: id)
   end
 
+  define_method(:save) do
+    result = DB.exec("INSERT INTO actors (name) VALUES ('#{@name}') RETURNING id;")
+    @id = result.first.fetch('id').to_i
+  end
+
 end
