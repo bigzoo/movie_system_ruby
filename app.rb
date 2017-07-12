@@ -31,3 +31,11 @@ require("sinatra")
    erb(:actors)
  end
 
+ post("/movies") do
+   name = params.fetch("name")
+   movie = Movie.new({:name => name, :id => nil})
+   movie.save()
+   @movies = Movie.all()
+   erb(:movies)
+ end
+
