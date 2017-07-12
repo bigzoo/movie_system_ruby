@@ -18,3 +18,8 @@ require("sinatra")
     erb(:actors)
   end
 
+  get("/movies") do
+    @movies = Movie.all()
+    erb(:movies)
+  end
+
