@@ -41,4 +41,16 @@ class Actor
     end
   end
 
+  define_method(:movies) do
+    actor_movies = []
+    results = DB.exec("SELECT movie_id FROM actors_movies WHERE actor_id = #{id};")
+    results.each do |result|
+      movie_id = result.fetch('movie_id').to_i
+      movie = DB.exec("SELECT * FROM movies WHERE id = #{movie_id};")
+      name = movie.first.fetch('name')
+      actor_movies.push(Movie.new(name: name, id: movie_id))
+    end
+    actor_movies
+  end
+
 end
