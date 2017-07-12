@@ -13,3 +13,8 @@ require("sinatra")
     erb(:index)
   end
 
+  get("/actors") do
+    @actors = Actor.all()
+    erb(:actors)
+  end
+
