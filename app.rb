@@ -60,3 +60,11 @@ require("sinatra")
      erb(:actor_info)
    end
 
+   patch("/movies/:id") do
+     movie_id = params.fetch("id").to_i()
+     @movie = Movie.find(movie_id)
+     actor_ids = params.fetch("actor_ids")
+     @movie.update({:actor_ids => actor_ids})
+     @actors = Actor.all()
+     erb(:movie_info)
+   end
