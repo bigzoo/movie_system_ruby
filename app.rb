@@ -7,3 +7,9 @@ require("sinatra")
 
   DB = PG.connect({:dbname => "movie_database"})
 
+  get("/") do
+    @actors = Actor.all()
+    @movies = Movie.all()
+    erb(:index)
+  end
+
